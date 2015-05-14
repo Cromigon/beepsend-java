@@ -1,5 +1,6 @@
 package se.cromigon.beepsend.api;
 
+import org.springframework.web.client.HttpClientErrorException;
 import se.cromigon.beepsend.api.Requesters.BeepsendConnectionRequester;
 import se.cromigon.beepsend.api.connection.Connection;
 import se.cromigon.beepsend.api.exceptions.ApiTokenInvalidException;
@@ -28,11 +29,30 @@ public class Beepsend {
         this.api_token = api_token;
     }
 
-    public Connection[] getConnections() throws ApiTokenNotSetException, ApiTokenInvalidException {
+    public Connection[] getConnections() throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
         if (api_token == "") {
             throw new ApiTokenNotSetException("The API Token is empty");
         } else {
             return beepsendConnectionRequester.getConnections(getApi_token());
+        }
+    }
+
+    public Connection getMyConnection() throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendConnectionRequester.getMyConnection(getApi_token());
+        }
+    }
+
+    public Connection getConnectionById(Integer id) throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException{
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendConnectionRequester.getConnectionById(getApi_token(), id);
         }
     }
 }
