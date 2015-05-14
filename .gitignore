@@ -1,0 +1,11 @@
+# The local live test I use during development
+beepsend-live-test/
+
+# Gradle specific
+.gradle
+build/
+settings.gradle
+
+# Intellij
+.idea/
+*.iml
