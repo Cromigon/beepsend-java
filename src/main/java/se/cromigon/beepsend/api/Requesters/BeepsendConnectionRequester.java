@@ -18,7 +18,7 @@ public class BeepsendConnectionRequester {
         return new HttpEntity<>("parameters", headers);
     }
 
-    public Connection[] getConnections(String api_token) throws ApiTokenInvalidException {
+    public Connection[] getConnections(String api_token) throws ApiTokenInvalidException, HttpClientErrorException {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
@@ -29,12 +29,13 @@ public class BeepsendConnectionRequester {
         } catch (HttpClientErrorException e) {
             if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
                 throw new ApiTokenInvalidException("The API Token is invalid");
+            } else {
+                throw e;
             }
         }
-        return null;
     }
 
-    public Connection getMyConnection(String api_token) throws ApiTokenInvalidException {
+    public Connection getMyConnection(String api_token) throws ApiTokenInvalidException, HttpClientErrorException {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
@@ -45,12 +46,13 @@ public class BeepsendConnectionRequester {
         } catch (HttpClientErrorException e) {
             if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
                 throw new ApiTokenInvalidException("The API Token is invalid");
+            } else {
+                throw e;
             }
         }
-        return null;
     }
 
-    public Connection getConnectionById(String api_token, Integer id) {
+    public Connection getConnectionById(String api_token, Integer id) throws ApiTokenInvalidException, HttpClientErrorException {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
 
@@ -60,9 +62,10 @@ public class BeepsendConnectionRequester {
         } catch (HttpClientErrorException e) {
             if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
                 throw new ApiTokenInvalidException("The API Token is invalid");
+            } else {
+                throw e;
             }
         }
-        return null;
     }
 
 }
