@@ -1,8 +1,6 @@
 package se.cromigon.beepsend.api;
 
-import org.springframework.http.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import se.cromigon.beepsend.api.Requesters.BeepsendConnectionRequester;
 import se.cromigon.beepsend.api.connection.Connection;
 import se.cromigon.beepsend.api.exceptions.ApiTokenInvalidException;
 import se.cromigon.beepsend.api.exceptions.ApiTokenNotSetException;
@@ -10,13 +8,16 @@ import se.cromigon.beepsend.api.exceptions.ApiTokenNotSetException;
 public class Beepsend {
 
     private String api_token;
+    private BeepsendConnectionRequester beepsendConnectionRequester;
 
     public Beepsend() {
         api_token = "";
+        beepsendConnectionRequester = new BeepsendConnectionRequester();
     }
 
     public Beepsend(String api_token) {
         this.api_token = api_token;
+        beepsendConnectionRequester = new BeepsendConnectionRequester();
     }
 
     public String getApi_token() {
@@ -31,19 +32,7 @@ public class Beepsend {
         if (api_token == "") {
             throw new ApiTokenNotSetException("The API Token is empty");
         } else {
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Authorization", "Token " + getApi_token());
-            HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-            try {
-                ResponseEntity<Connection[]> response = restTemplate.exchange("https://api.beepsend.com/2/connections/", HttpMethod.GET, entity, Connection[].class);
-                return response.getBody();
-            } catch (HttpClientErrorException e) {
-                if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
-                    throw new ApiTokenInvalidException("The API Token is invalid");
-                }
-            }
+            return beepsendConnectionRequester.getConnections(getApi_token());
         }
-        return null;
     }
 }
