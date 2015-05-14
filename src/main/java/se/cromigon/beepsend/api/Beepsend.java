@@ -55,4 +55,12 @@ public class Beepsend {
             return beepsendConnectionRequester.getConnectionById(getApi_token(), id);
         }
     }
+
+    public Connection updateConnection(Connection connection){
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendConnectionRequester.updateConnection(getApi_token(), connection);
+        }
+    }
 }
