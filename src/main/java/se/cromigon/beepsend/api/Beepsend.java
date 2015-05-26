@@ -1,8 +1,10 @@
 package se.cromigon.beepsend.api;
 
 import org.springframework.web.client.HttpClientErrorException;
+import se.cromigon.beepsend.api.Pricelist.PriceList;
 import se.cromigon.beepsend.api.Requesters.BeepsendConnectionRequester;
 import se.cromigon.beepsend.api.Requesters.BeepsendNumberRequester;
+import se.cromigon.beepsend.api.Requesters.BeepsendPriceListRequester;
 import se.cromigon.beepsend.api.connection.Connection;
 import se.cromigon.beepsend.api.exceptions.ApiTokenInvalidException;
 import se.cromigon.beepsend.api.exceptions.ApiTokenNotSetException;
@@ -13,11 +15,13 @@ public class Beepsend {
     private String api_token;
     private BeepsendConnectionRequester beepsendConnectionRequester;
     private BeepsendNumberRequester beepsendNumberRequester;
+    private BeepsendPriceListRequester beepsendPriceListRequester;
 
     public Beepsend() {
         api_token = "";
         beepsendConnectionRequester = new BeepsendConnectionRequester();
         beepsendNumberRequester = new BeepsendNumberRequester();
+        beepsendPriceListRequester = new BeepsendPriceListRequester();
     }
 
     public Beepsend(String api_token) {
@@ -95,6 +99,42 @@ public class Beepsend {
             throw new ApiTokenNotSetException("The API Token is empty");
         } else {
             return beepsendNumberRequester.getNumbers(getApi_token());
+        }
+    }
+
+    public PriceList getMyPriceLists() throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendPriceListRequester.getMyCurrentPricelists(getApi_token());
+        }
+    }
+
+    public PriceList getPriceListsByConnectionId(Integer id) throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendPriceListRequester.getCurrentPriceListsByConnectionId(getApi_token(), id);
+        }
+    }
+
+    public PriceList getPriceListsById(Integer id) throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendPriceListRequester.getCurrentPriceListById(getApi_token(), id);
+        }
+    }
+
+    public PriceList getPriceListsByLabel(String label) throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendPriceListRequester.getCurrentPriceListByLabel(getApi_token(), label);
         }
     }
 }

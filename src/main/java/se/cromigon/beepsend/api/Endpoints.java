@@ -10,4 +10,8 @@ public interface Endpoints {
     String CONNECTIONS_ID_PASSWORDRESET = "/connections/%d/passwordreset";
     String NUMBERS = "/numbers/";
     String NUMBERS_ID = "/numbers/%d";
+    String CONNECTIONS_ID_PRICELISTS_CURRENT = "/connections/%d/pricelists/current";
+    String CONNECTIONS_ME_PRICELISTS_CURRENT = "/connections/me/pricelists/current";
+    String PRICELISTS_ID = "/pricelists/%d";
+    String PRICELISTS_LABEL = "/pricelists/%s";
 }
