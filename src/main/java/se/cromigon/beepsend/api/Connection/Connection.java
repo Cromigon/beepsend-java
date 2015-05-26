@@ -99,6 +99,8 @@ public class Connection {
         this.label = label;
     }
 
+    public void setName(String name) { this.label = name; }
+
     public void setApi_token(String api_token) {
         this.api_token = api_token;
     }
