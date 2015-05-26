@@ -126,4 +126,38 @@ public class BeepsendConnectionRequester {
             }
         }
     }
+
+    public String connectionTokenReset(String api_token) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> entity = generateHttpEntity(api_token);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(Endpoints.BASE_URL + Endpoints.CONNECTIONS_ID_TOKENRESET,
+                    HttpMethod.GET, entity, String.class);
+            return response.getBody();
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
+                throw new ApiTokenInvalidException("The API Token is invalid");
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    public String connectionPasswordReset(String api_token) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> entity = generateHttpEntity(api_token);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(Endpoints.BASE_URL + Endpoints.CONNECTIONS_ID_PASSWORDRESET,
+                    HttpMethod.GET, entity, String.class);
+            return response.getBody();
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
+                throw new ApiTokenInvalidException("The API Token is invalid");
+            } else {
+                throw e;
+            }
+        }
+    }
 }
