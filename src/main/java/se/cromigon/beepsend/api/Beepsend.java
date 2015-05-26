@@ -102,6 +102,15 @@ public class Beepsend {
         }
     }
 
+    public Number getNumberById(Integer id) throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendNumberRequester.getNumberById(getApi_token(), id);
+        }
+    }
+
     public PriceList getMyPriceLists() throws ApiTokenNotSetException, ApiTokenInvalidException,
             HttpClientErrorException {
         if (api_token == "") {
