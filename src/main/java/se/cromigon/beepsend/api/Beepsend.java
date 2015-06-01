@@ -9,6 +9,8 @@ import se.cromigon.beepsend.api.connection.Connection;
 import se.cromigon.beepsend.api.exceptions.ApiTokenInvalidException;
 import se.cromigon.beepsend.api.exceptions.ApiTokenNotSetException;
 import se.cromigon.beepsend.api.number.Number;
+import se.cromigon.beepsend.api.requesters.BeepsendSendSMSRequester;
+import se.cromigon.beepsend.api.sms.SMS;
 
 public class Beepsend {
 
@@ -16,12 +18,14 @@ public class Beepsend {
     private BeepsendConnectionRequester beepsendConnectionRequester;
     private BeepsendNumberRequester beepsendNumberRequester;
     private BeepsendPriceListRequester beepsendPriceListRequester;
+    private BeepsendSendSMSRequester beepsendSendSMSRequester;
 
     public Beepsend() {
         api_token = "";
         beepsendConnectionRequester = new BeepsendConnectionRequester();
         beepsendNumberRequester = new BeepsendNumberRequester();
         beepsendPriceListRequester = new BeepsendPriceListRequester();
+        beepsendSendSMSRequester = new BeepsendSendSMSRequester();
     }
 
     public Beepsend(String api_token) {
@@ -144,6 +148,15 @@ public class Beepsend {
             throw new ApiTokenNotSetException("The API Token is empty");
         } else {
             return beepsendPriceListRequester.getCurrentPriceListByLabel(getApi_token(), label);
+        }
+    }
+
+    public SMS sendSMS(SMS sms, Connection connection) throws ApiTokenNotSetException, ApiTokenInvalidException,
+            HttpClientErrorException {
+        if (api_token == "") {
+            throw new ApiTokenNotSetException("The API Token is empty");
+        } else {
+            return beepsendSendSMSRequester.sendSMS(getApi_token(), sms, connection);
         }
     }
 }

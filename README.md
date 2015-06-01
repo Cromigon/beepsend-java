@@ -18,7 +18,7 @@
     - [ ] Update User password
     - [ ] Reset User password
     - [ ] Reset User token
-- [ ] <a href="https://api.beepsend.com/docs.html#send-sms">Send SMS</a>
+- [x] <a href="https://api.beepsend.com/docs.html#send-sms">Send SMS</a>
     - [ ] Binary SMS
     - [ ] Errors
 - [ ] <a href="https://api.beepsend.com/docs.html#sms-lookup">SMS Lookup</a>

@@ -14,4 +14,5 @@ public interface Endpoints {
     String CONNECTIONS_ME_PRICELISTS_CURRENT = "/connections/me/pricelists/current";
     String PRICELISTS_ID = "/pricelists/%d";
     String PRICELISTS_LABEL = "/pricelists/%s";
+    String SEND_SMS = "/send/%d";
 }
