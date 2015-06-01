@@ -1,4 +1,4 @@
-package se.cromigon.beepsend.api.Requesters;
+package se.cromigon.beepsend.api.requesters;
 
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;

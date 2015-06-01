@@ -1,10 +1,10 @@
 package se.cromigon.beepsend.api;
 
 import org.springframework.web.client.HttpClientErrorException;
-import se.cromigon.beepsend.api.Pricelist.PriceList;
-import se.cromigon.beepsend.api.Requesters.BeepsendConnectionRequester;
-import se.cromigon.beepsend.api.Requesters.BeepsendNumberRequester;
-import se.cromigon.beepsend.api.Requesters.BeepsendPriceListRequester;
+import se.cromigon.beepsend.api.pricelist.PriceList;
+import se.cromigon.beepsend.api.requesters.BeepsendConnectionRequester;
+import se.cromigon.beepsend.api.requesters.BeepsendNumberRequester;
+import se.cromigon.beepsend.api.requesters.BeepsendPriceListRequester;
 import se.cromigon.beepsend.api.connection.Connection;
 import se.cromigon.beepsend.api.exceptions.ApiTokenInvalidException;
 import se.cromigon.beepsend.api.exceptions.ApiTokenNotSetException;

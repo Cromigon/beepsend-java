@@ -1,10 +1,10 @@
-package se.cromigon.beepsend.api.Requesters;
+package se.cromigon.beepsend.api.requesters;
 
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import se.cromigon.beepsend.api.Endpoints;
-import se.cromigon.beepsend.api.Pricelist.PriceList;
+import se.cromigon.beepsend.api.pricelist.PriceList;
 import se.cromigon.beepsend.api.exceptions.ApiTokenInvalidException;
 
 public class BeepsendPriceListRequester {

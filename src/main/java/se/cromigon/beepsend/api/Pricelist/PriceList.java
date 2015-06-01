@@ -1,4 +1,4 @@
-package se.cromigon.beepsend.api.Pricelist;
+package se.cromigon.beepsend.api.pricelist;
 
 import se.cromigon.beepsend.api.network.Network;
 
