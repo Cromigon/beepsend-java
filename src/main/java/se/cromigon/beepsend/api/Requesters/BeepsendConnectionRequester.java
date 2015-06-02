@@ -58,9 +58,13 @@ public class BeepsendConnectionRequester {
         return new HttpEntity<>(updateRequestBody, headers);
     }
 
+    public RestTemplate createRestTemplate() {
+        return new RestTemplate();
+    }
+
     public Connection[] getConnections(String api_token) throws ApiTokenInvalidException, HttpClientErrorException {
 
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = createRestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
 
         try {
@@ -78,7 +82,7 @@ public class BeepsendConnectionRequester {
 
     public Connection getMyConnection(String api_token) throws ApiTokenInvalidException, HttpClientErrorException {
 
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = createRestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
 
         try {
@@ -95,7 +99,7 @@ public class BeepsendConnectionRequester {
 
     public Connection getConnectionById(String api_token, Integer id) throws ApiTokenInvalidException,
             HttpClientErrorException {
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = createRestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
 
         try {
@@ -112,7 +116,7 @@ public class BeepsendConnectionRequester {
 
     public Connection updateConnection(String api_token, Connection connection) throws ApiTokenInvalidException,
             HttpClientErrorException {
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = createRestTemplate();
         HttpEntity<UpdateRequestBody> entity = generateHttpEntity(api_token, connection);
         try {
             ResponseEntity<Connection> response = restTemplate.exchange(Endpoints.BASE_URL +
@@ -130,7 +134,7 @@ public class BeepsendConnectionRequester {
 
     public String connectionTokenReset(String api_token) throws ApiTokenInvalidException,
             HttpClientErrorException {
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = createRestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
 
         try {
@@ -148,7 +152,7 @@ public class BeepsendConnectionRequester {
 
     public String connectionPasswordReset(String api_token) throws ApiTokenInvalidException,
             HttpClientErrorException {
-        RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = createRestTemplate();
         HttpEntity<String> entity = generateHttpEntity(api_token);
 
         try {
