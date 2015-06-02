@@ -2,6 +2,7 @@
 
 
 ## TODO
+- [ ] Tests
 
 - [x] <a href="https://api.beepsend.com/docs.html#authentication">Authentication</a>
 - [x] <a href="https://api.beepsend.com/docs.html#customer">Customer</a>
