@@ -1,11 +1,26 @@
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: "jacoco"
 
 sourceCompatibility = 1.8
-version = '1.0'
+version = '0.0.1'
 
 repositories {
     mavenCentral()
+}
+
+task dist(dependsOn: [build, test, jacocoTestReport]) {
+    println 'Compiling and running all tests and coverage report'
+}
+
+task dependencyJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Beepsend api java wrapper with dependencies',
+                'Implementation-Version': version
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 dependencies {
@@ -14,4 +29,17 @@ dependencies {
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jacoco {
+    toolVersion = "0.7.5.201505241946"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
 }
